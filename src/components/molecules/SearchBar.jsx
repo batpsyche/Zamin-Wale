@@ -74,6 +74,10 @@ const SearchData = [
                 value: "vindhane",
             },
             {
+                label: "Palghar",
+                value: "palghar",
+            },
+            {
                 label: "Karjat",
                 value: "karjat",
             },
