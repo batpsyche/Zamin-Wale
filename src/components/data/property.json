@@ -1,0 +1,49 @@
+[
+    {
+        "propertyId": "1",
+        "propertyType": "Apartment",
+        "priceTotal": 4500000,
+        "plotArea": {
+            "value": 1200,
+            "unit": "sq.ft"
+        },
+        "locality": "MG Road",
+        "city": "Bangalore"
+    },
+    {
+        "propertyId": "2",
+        "propertyType": "Villa",
+        "priceTotal": 18000000,
+        "plotArea": {
+            "value": 2400,
+            "unit": "sq.ft"
+        },
+        "locality": "Whitefield",
+        "city": "Bangalore"
+    }
+    ,
+    {
+        "propertyId": "2",
+        "propertyType": "Villa",
+        "priceTotal": 14000000,
+        "plotArea": {
+            "value": 2400,
+            "unit": "sq.ft"
+        },
+        "locality": "Whitefield",
+        "city": "Bangalore"
+    }
+    ,
+    {
+        "propertyId": "2",
+        "propertyType": "Villa",
+        "priceTotal": 17000000,
+        "plotArea": {
+            "value": 2400,
+            "unit": "sq.ft"
+        },
+        "locality": "Whitefield",
+        "city": "Bangalore"
+    }
+
+]
