@@ -1,9 +1,13 @@
 import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
 import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel";
-import { cn } from "@/lib/utils";
+import { cn, PLACEHOLDER_IMAGE } from "@/lib/utils";
 
 const ImageScroll = ({ card, isHovered, className }) => {
+    const photos = Array.isArray(card) ? card.filter(Boolean) : [];
+    const firstSrc = photos[0] || PLACEHOLDER_IMAGE;
+    const fallbackSrc = "/assets/recommonded-property/recomonded-property1.jpeg";
+
     return (
         <>
             {!isHovered ? (
@@ -14,7 +18,7 @@ const ImageScroll = ({ card, isHovered, className }) => {
                     )}
                 >
                     <Image
-                        src={card[0]}
+                        src={firstSrc}
                         alt={"house"}
                         fill
                         className="rounded-t-lg transition-all object-cover h-full w-full"
@@ -34,7 +38,7 @@ const ImageScroll = ({ card, isHovered, className }) => {
                     className="flex w-full h-full"
                 >
                     <CarouselContent>
-                        {card.map((card, index) => (
+                        {(photos.length ? photos : [PLACEHOLDER_IMAGE]).map((src, index) => (
                             <CarouselItem
                                 key={`${index}-image`}
                                 className="basis-full"
@@ -46,10 +50,7 @@ const ImageScroll = ({ card, isHovered, className }) => {
                                     )}
                                 >
                                     <Image
-                                        src={
-                                            card ||
-                                            "/assets/recommonded-property/recomonded-property1.jpeg"
-                                        }
+                                        src={src || fallbackSrc}
                                         alt={`house-${index}`}
                                         fill
                                         className="rounded-t-lg object-cover"

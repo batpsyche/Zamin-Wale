@@ -21,6 +21,14 @@ const nextConfig = {
             {
                 protocol: "https",
                 hostname: "youtube.com"
+            },
+            {
+                protocol: "https",
+                hostname: "placehold.co"
+            },
+            {
+                protocol: "https",
+                hostname: "images.unsplash.com"
             }
         ]
     },

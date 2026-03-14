@@ -1,5 +1,11 @@
 # **Zaminwale Documentation**
 
+## For clients (Zaminwale)
+
+**Project requirements & current status** – A simple, non-technical overview of what the website does today (static vs API), and what the backend and admin panel will deliver, is in **[docs/PROJECT_REQUIREMENTS.md](docs/PROJECT_REQUIREMENTS.md)**. This is the main document for client review and sign-off.
+
+---
+
 ## Project Setup
 
 GO to the github copy the git clone link and paste it in your terminal and run the command.
@@ -20,6 +26,45 @@ Use this command to run the application.
 ```
 pnpm dev
 ```
+
+---
+
+## Running the backend (API + database)
+
+The repo includes a Node.js API and PostgreSQL for the frontend. To run them locally:
+
+1. **Start the database (Docker)**
+
+   ```bash
+   docker compose up -d db
+   ```
+
+2. **Configure and run the API**
+
+   ```bash
+   cd backend
+   cp .env.example .env
+   # Edit .env: set JWT_SECRET and ensure DATABASE_URL points to the DB (e.g. postgresql://zaminwale:zaminwale_secret@localhost:5432/zaminwale)
+   npm install
+   npx prisma generate
+   npx prisma migrate deploy
+   npm run dev
+   ```
+
+   The API runs at `http://localhost:4000` by default.
+
+3. **Point the frontend at the API**
+
+   In the project root, copy `.env.example` to `.env.local` and set:
+
+   ```
+   API_URL=http://localhost:4000/api/v1
+   ```
+
+   Then run the frontend with `pnpm dev`. The app will use your local API and database.
+
+API endpoints are listed in [docs/API.md](docs/API.md).
+
 ---
 
 ## Introduction

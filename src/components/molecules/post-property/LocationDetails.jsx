@@ -41,14 +41,13 @@ const Step2Data = [
         label: "Locality",
         data: [
             { value: "Thane", label: "Thane" },
-            { value: "Alibaug", label: "Alibaug" },
-            { value: "khopoli Pali Road", label: "khopoli Pali Road" },
             { label: "Panvel", value: "Panvel" },
             { label: "Uran", value: "Uran" },
             { label: "Chirle", value: "Chirle" },
             { label: "Ranjanpada", value: "Ranjanpada" },
             { label: "Vindhane", value: "Vindhane" },
             { label: "Karjat", value: "Karjat" },
+            { label: "Palghar", value: "palghar" },
         ],
     },
 ];

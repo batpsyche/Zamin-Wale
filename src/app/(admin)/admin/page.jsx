@@ -1,5 +1,8 @@
 "use client";
 
+import { logIn } from "@/actions/user";
+import cookieService from "@/services/cookie";
+import useZaminwaleStore from "@/store";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -12,19 +15,24 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { toast } from "sonner";
 import { z } from "zod";
 
 const formSchema = z.object({
-    email: z.string().min(2, {
-        message: "Email must be at least 2 characters.",
-    }),
-    password: z.string().min(2, {
+    email: z.string().email({ message: "Enter a valid email." }),
+    password: z.string().min(8, {
         message: "Password must be at least 8 characters.",
     }),
 });
 
 const page = () => {
+    const [loading, setLoading] = useState(false);
+    const router = useRouter();
+    const dispatch = useZaminwaleStore((store) => store.dispatch);
+
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -33,8 +41,31 @@ const page = () => {
         },
     });
 
-    const onSubmit = (values) => {
-        console.log(values);
+    const onSubmit = async (values) => {
+        setLoading(true);
+        try {
+            const resp = await logIn({ email: values.email, password: values.password });
+            cookieService.setTokens({ accessToken: resp.token });
+            dispatch({
+                type: "SET_STATE",
+                payload: {
+                    user: {
+                        id: resp.id,
+                        name: resp.name,
+                        email: resp.email,
+                        mobileNo: resp.mobileNo,
+                    },
+                    isAuthenticated: true,
+                },
+            });
+            form.reset();
+            toast.success(resp.message ?? "Login successful");
+            router.push("/admin/dashboard");
+        } catch (err) {
+            toast.error(err?.message ?? "Invalid email or password");
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -85,8 +116,9 @@ const page = () => {
                             <Button
                                 className="w-full bg-[#6f272b]"
                                 type="submit"
+                                disabled={loading}
                             >
-                                Log In
+                                {loading ? "Logging in…" : "Log In"}
                             </Button>
                         </form>
                     </Form>

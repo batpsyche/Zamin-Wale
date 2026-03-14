@@ -1,6 +1,6 @@
 "use client";
 
-import { cn, formatCurrency } from "@/lib/utils";
+import { cn, formatCurrency, PLACEHOLDER_IMAGE } from "@/lib/utils";
 import Autoplay from "embla-carousel-autoplay";
 import { IndianRupee } from "lucide-react";
 import Image from "next/image";
@@ -20,6 +20,11 @@ import {
 } from "../ui/dialog";
 
 const BentoGridScroll = ({ cards }) => {
+    const photos = Array.isArray(cards.propertyPhotos)
+        ? cards.propertyPhotos.filter((src) => src && String(src).trim())
+        : [];
+    const safePhotos = photos.length ? photos : [PLACEHOLDER_IMAGE];
+
     return (
         <>
             <div className="flex flex-col gap-1 w-full">
@@ -71,11 +76,11 @@ const BentoGridScroll = ({ cards }) => {
                                             </div>
                                         </CarouselItem>
                                     )}
-                                    {cards.propertyPhotos.map((card, index) => (
+                                    {safePhotos.map((src, index) => (
                                         <CarouselItem key={index}>
                                             <div className="relative rounded-lg lg:rounded-r-none lg:rounded-l-lg aspect-video flex w-full">
                                                 <Image
-                                                    src={card}
+                                                    src={src}
                                                     alt="house"
                                                     fill
                                                     className="object-cover rounded-lg lg:rounded-r-none lg:rounded-l-lg"
@@ -101,11 +106,11 @@ const BentoGridScroll = ({ cards }) => {
                                     className="w-full h-full"
                                 >
                                     <CarouselContent>
-                                        {cards.propertyPhotos.map((card, index) => (
+                                        {safePhotos.map((src, index) => (
                                             <CarouselItem key={index}>
                                                 <div className="relative rounded-lg lg:rounded-r-none lg:rounded-l-lg aspect-video flex w-full">
                                                     <Image
-                                                        src={card}
+                                                        src={src}
                                                         alt="house"
                                                         fill
                                                         className="object-cover rounded-lg lg:rounded-r-none lg:rounded-l-lg"
@@ -122,12 +127,12 @@ const BentoGridScroll = ({ cards }) => {
                 </div>
                 <div className="hidden md:flex lg:flex-col w-full lg:w-1/4">
                     <ImagePopup
-                        image={cards.propertyPhotos[1]}
+                        image={safePhotos[1] ?? PLACEHOLDER_IMAGE}
                         className="rounded-bl-lg lg:rounded-bl-none lg:rounded-tr-lg"
                     />
-                    <ImagePopup image={cards.propertyPhotos[2]} className="" />
+                    <ImagePopup image={safePhotos[2] ?? PLACEHOLDER_IMAGE} className="" />
                     <ImagePopup
-                        image={cards.propertyPhotos[3]}
+                        image={safePhotos[3] ?? PLACEHOLDER_IMAGE}
                         className="rounded-br-lg"
                     />
                 </div>
@@ -139,6 +144,7 @@ const BentoGridScroll = ({ cards }) => {
 export default BentoGridScroll;
 
 const ImagePopup = ({ image, className }) => {
+    const src = image && String(image).trim() ? image : PLACEHOLDER_IMAGE;
     return (
         <>
             <Dialog>
@@ -149,7 +155,7 @@ const ImagePopup = ({ image, className }) => {
                     )}
                 >
                     <Image
-                        src={image}
+                        src={src}
                         alt="house"
                         fill
                         className={cn("object-cover", className)}
@@ -161,7 +167,7 @@ const ImagePopup = ({ image, className }) => {
                     </DialogHeader>
                     <div className="flex w-full aspect-video relative">
                         <Image
-                            src={image}
+                            src={src}
                             alt="property"
                             fill
                             className="object-cover rounded-lg"

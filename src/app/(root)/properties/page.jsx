@@ -104,8 +104,8 @@ const page = () => {
                                     <div className="relative aspect-video bg-cover rounded-t-lg flex w-full overflow-hidden">
                                         <Image
                                             src={
-                                                property.propertyPhotos[0] ??
-                                                "/assets/property/commercial.webp"
+                                                (property.propertyPhotos?.[0] && String(property.propertyPhotos[0]).trim()) ||
+                                                "https://placehold.co/800x600/eee/999?text=Property&font=source-sans-3"
                                             }
                                             alt="house"
                                             fill

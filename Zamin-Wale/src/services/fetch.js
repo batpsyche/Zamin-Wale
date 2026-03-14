@@ -3,9 +3,10 @@
 import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
 
-const getToken = (tokenType = "access") => {
+const getToken = async (tokenType = "access") => {
 	try {
-		const token = cookies().get(`${process.env.NEXT_PUBLIC_COOKIE_KEY}_${tokenType}`);
+		const cookieStore = await cookies();
+		const token = cookieStore.get(`${process.env.NEXT_PUBLIC_COOKIE_KEY}_${tokenType}`);
 		if (!token) {
 			console.error(`Token of type ${tokenType} not found in cookies.`);
 			return null;
@@ -18,10 +19,11 @@ const getToken = (tokenType = "access") => {
 	}
 };
 
-const handleTokenRefreshFailure = () => {
+const handleTokenRefreshFailure = async () => {
 	try {
 		const cookieKey = process.env.NEXT_PUBLIC_COOKIE_KEY;
-		cookies().delete(`${cookieKey}_access`);
+		const cookieStore = await cookies();
+		cookieStore.delete(`${cookieKey}_access`);
 		console.log("Access token deleted due to refresh failure.");
 	} catch (error) {
 		console.error("Error handling token refresh failure:", error);

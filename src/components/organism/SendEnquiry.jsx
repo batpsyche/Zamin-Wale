@@ -10,8 +10,11 @@ import {
     CarouselPrevious,
 } from "../ui/carousel";
 import EnquireForm from "../molecules/EnquireForm";
+import { PLACEHOLDER_IMAGE } from "@/lib/utils";
 
 const SendEnquiry = ({ cards, propertyId, uid }) => {
+    const safeCards = Array.isArray(cards) ? cards.filter((c) => c && String(c).trim()) : [];
+    const displayCards = safeCards.length ? safeCards : [PLACEHOLDER_IMAGE];
     return (
         <div className="flex flex-col gap-4 md:gap-6 lg:gap-8 xl:gap-10 px-4 py-6 md:py-8 lg:py-10 w-full max-w-[1360px] border border-neutral-200 shadow-md mx-auto rounded-3xl h-auto relative bg-white">
             <div className="flex w-full items-center justify-center">
@@ -37,11 +40,11 @@ const SendEnquiry = ({ cards, propertyId, uid }) => {
                         className="w-full h-full"
                     >
                         <CarouselContent>
-                            {cards.map((card, index) => (
+                            {displayCards.map((src, index) => (
                                 <CarouselItem key={index}>
                                     <div className="relative rounded-2xl aspect-video md:aspect-square lg:aspect-video flex w-full">
                                         <Image
-                                            src={card}
+                                            src={src}
                                             alt="house"
                                             fill
                                             className="object-cover rounded-2xl"

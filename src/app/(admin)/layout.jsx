@@ -1,12 +1,7 @@
+import AdminAuthGuard from "@/components/molecules/admin/AdminAuthGuard";
 
 const AdminLayout = ({ children }) => {
-    return (
-        <div className="flex w-full flex-1">
-            <div className="flex h-full w-full flex-col overflow-y-auto">
-                {children}
-            </div>
-        </div>
-    )
-}
+    return <AdminAuthGuard>{children}</AdminAuthGuard>;
+};
 
-export default AdminLayout
+export default AdminLayout;

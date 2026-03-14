@@ -1,6 +1,6 @@
 "use client";
 
-import { formatCurrency } from "@/lib/utils";
+import { formatCurrency, PLACEHOLDER_IMAGE } from "@/lib/utils";
 import { IndianRupeeIcon } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -69,8 +69,8 @@ const Property = () => {
                                                     <div className="relative aspect-video lg:h-[312px] h-[200px] bg-cover rounded-2xl flex w-full">
                                                         <Image
                                                             src={
-                                                                card
-                                                                    ?.propertyPhotos[0]
+                                                                (card?.propertyPhotos?.[0] && String(card.propertyPhotos[0]).trim()) ||
+                                                                PLACEHOLDER_IMAGE
                                                             }
                                                             alt="house"
                                                             fill

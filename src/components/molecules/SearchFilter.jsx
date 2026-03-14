@@ -44,8 +44,6 @@ const SearchTrigger = (locationId) => {
     );
 
     if (matchingLocation) {
-        console.log(matchingLocation, "matchingLocation");
-
         return matchingLocation[locationId];
     } else {
         console.warn(`No matching location found for: ${locationId}`);
@@ -78,21 +76,18 @@ const FilterSchema = z.object({
     locationAdvantages: z.array(z.string()).optional(),
 });
 
-console.log(FilterSchema, "FilterSchema");
-
-
 const SearchFilter = () => {
     const params = useParams();
     const dispatch = useZaminwaleStore((store) => store.dispatch);
     const searchParams = useSearchParams();
-    const propertyType = searchParams.get("propertyType");
+    const propertyTypeParam = searchParams.get("propertyType");
     const priceTotalMinValue = searchParams.get("priceTotalMinValue");
     const priceTotalMaxValue = searchParams.get("priceTotalMaxValue");
 
     const form = useForm({
         resolver: zodResolver(FilterSchema),
         defaultValues: {
-            propertyType: propertyType || "",
+            propertyType: propertyTypeParam && propertyTypeParam !== "All" ? propertyTypeParam : "",
             propertyCategories: "",
             city: "",
             locality: SearchTrigger(params.locationId),
@@ -143,18 +138,18 @@ const SearchFilter = () => {
     }, [params]);
 
     useEffect(() => {
-        if (params.locationId && propertyType) {
+        if (params.locationId && propertyTypeParam && propertyTypeParam !== "All") {
             const matchedLocality = SearchTrigger(params.locationId);
             if (matchedLocality) {
                 const initialFilter = {
                     locality: matchedLocality,
-                    propertyType: propertyType,
+                    propertyType: propertyTypeParam,
                 };
                 onSubmit(initialFilter);
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [params.locationId, propertyType]);
+    }, [params.locationId, propertyTypeParam]);
 
     useEffect(() => {
         if (params.locationId && priceTotalMinValue && priceTotalMaxValue) {
@@ -202,9 +197,9 @@ const SearchFilter = () => {
                                                     <FormItem
                                                         key={index}
                                                         className={`flex items-center space-y-0 ${field.value ===
-                                                            item.value
-                                                            ? "bg-blue-100 border border-blue-400"
-                                                            : "bg-white border"
+                                                                item.value
+                                                                ? "bg-blue-100 border border-blue-400"
+                                                                : "bg-white border"
                                                             } rounded-full px-4 py-2`}
                                                     >
                                                         <FormControl className="sr-only">
@@ -249,9 +244,9 @@ const SearchFilter = () => {
                                                     <FormItem
                                                         key={index}
                                                         className={`flex items-center space-y-0 ${field.value ===
-                                                            item.value
-                                                            ? "bg-blue-100 border border-blue-400"
-                                                            : "bg-white border"
+                                                                item.value
+                                                                ? "bg-blue-100 border border-blue-400"
+                                                                : "bg-white border"
                                                             } rounded-full px-4 py-2`}
                                                     >
                                                         <FormControl className="sr-only">
@@ -296,9 +291,9 @@ const SearchFilter = () => {
                                                     <FormItem
                                                         key={index}
                                                         className={`flex items-center space-y-0 ${field.value ===
-                                                            item.value
-                                                            ? "bg-blue-100 border border-blue-400"
-                                                            : "bg-white border"
+                                                                item.value
+                                                                ? "bg-blue-100 border border-blue-400"
+                                                                : "bg-white border"
                                                             } rounded-full px-4 py-2`}
                                                     >
                                                         <FormControl className="sr-only">
@@ -343,9 +338,9 @@ const SearchFilter = () => {
                                                     <FormItem
                                                         key={index}
                                                         className={`flex items-center space-y-0 ${field.value ===
-                                                            item.value
-                                                            ? "bg-blue-100 border border-blue-400"
-                                                            : "bg-white border"
+                                                                item.value
+                                                                ? "bg-blue-100 border border-blue-400"
+                                                                : "bg-white border"
                                                             } rounded-full px-4 py-2`}
                                                     >
                                                         <FormControl className="sr-only">
@@ -540,9 +535,9 @@ const SearchFilter = () => {
                                                     <FormItem
                                                         key={index}
                                                         className={`flex items-center space-y-0 ${field.value ===
-                                                            item.value
-                                                            ? "bg-blue-100 border border-blue-400"
-                                                            : "bg-white border"
+                                                                item.value
+                                                                ? "bg-blue-100 border border-blue-400"
+                                                                : "bg-white border"
                                                             } rounded-full px-4 py-2`}
                                                     >
                                                         <FormControl className="sr-only">
@@ -626,9 +621,9 @@ const SearchFilter = () => {
                                                     <FormItem
                                                         key={index}
                                                         className={`flex items-center space-y-0 ${field.value ===
-                                                            item.value
-                                                            ? "bg-blue-100 border border-blue-400"
-                                                            : "bg-white border"
+                                                                item.value
+                                                                ? "bg-blue-100 border border-blue-400"
+                                                                : "bg-white border"
                                                             } rounded-full px-4 py-2`}
                                                     >
                                                         <FormControl className="sr-only">
@@ -712,9 +707,9 @@ const SearchFilter = () => {
                                                     <FormItem
                                                         key={index}
                                                         className={`flex items-center space-y-0 ${field.value ===
-                                                            item.value
-                                                            ? "bg-blue-100 border border-blue-400"
-                                                            : "bg-white border"
+                                                                item.value
+                                                                ? "bg-blue-100 border border-blue-400"
+                                                                : "bg-white border"
                                                             } rounded-full px-4 py-2`}
                                                     >
                                                         <FormControl className="sr-only">
@@ -761,9 +756,9 @@ const SearchFilter = () => {
                                                     <FormItem
                                                         key={index}
                                                         className={`flex items-center space-y-0 ${field.value ===
-                                                            item.value
-                                                            ? "bg-blue-100 border border-blue-400"
-                                                            : "bg-white border"
+                                                                item.value
+                                                                ? "bg-blue-100 border border-blue-400"
+                                                                : "bg-white border"
                                                             } rounded-full px-4 py-2`}
                                                     >
                                                         <FormControl className="sr-only">
@@ -956,8 +951,8 @@ const SearchFilter = () => {
                                                                 className={`flex font-normal items-center space-y-0 ${field.value?.includes(
                                                                     item.value
                                                                 )
-                                                                    ? "bg-blue-100 border-blue-400"
-                                                                    : "bg-white border"
+                                                                        ? "bg-blue-100 border-blue-400"
+                                                                        : "bg-white border"
                                                                     } rounded-full px-4 py-2`}
                                                             >
                                                                 {item.label}
@@ -1020,8 +1015,8 @@ const SearchFilter = () => {
                                                                 className={`flex font-normal items-center space-y-0 ${field.value?.includes(
                                                                     item.value
                                                                 )
-                                                                    ? "bg-blue-100 border-blue-400"
-                                                                    : "bg-white border"
+                                                                        ? "bg-blue-100 border-blue-400"
+                                                                        : "bg-white border"
                                                                     } rounded-full px-4 py-2`}
                                                             >
                                                                 {item.label}
@@ -1092,9 +1087,9 @@ const SearchFilter = () => {
                                                     <FormItem
                                                         key={value}
                                                         className={`flex items-center space-y-0 ${field.value ===
-                                                            value
-                                                            ? "bg-blue-100 border-blue-400"
-                                                            : "bg-white border"
+                                                                value
+                                                                ? "bg-blue-100 border-blue-400"
+                                                                : "bg-white border"
                                                             } rounded-full px-4 py-2`}
                                                     >
                                                         <FormControl className="sr-only">
@@ -1162,8 +1157,8 @@ const SearchFilter = () => {
                                                                 className={`flex font-normal items-center space-y-0 ${field.value?.includes(
                                                                     item.value
                                                                 )
-                                                                    ? "bg-blue-100 border-blue-400"
-                                                                    : "bg-white border"
+                                                                        ? "bg-blue-100 border-blue-400"
+                                                                        : "bg-white border"
                                                                     } rounded-full px-4 py-2`}
                                                             >
                                                                 {item.label}

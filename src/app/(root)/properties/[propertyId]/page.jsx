@@ -1,5 +1,4 @@
-import { properties } from "@/constants/properties";
-
+import { getOneProperty } from "@/actions/property";
 import BentoGridScroll from "@/components/molecules/BentoGridScroll";
 import CityImage from "@/components/molecules/CityImage";
 import EnquireForm from "@/components/molecules/EnquireForm";
@@ -21,13 +20,18 @@ import { IndianRupee } from "lucide-react";
 
 const page = async ({ params }) => {
     const PropertyId = (await params).propertyId;
-    const result = properties.find(
-  (item) => item.propertyId === PropertyId
-);
+    const result = (await getOneProperty(PropertyId)) ?? {};
+    const overlooking = result.overlooking ?? [];
+    const amenities = result.amenities ?? [];
+    const locationAdvantages = result.locationAdvantages ?? [];
 
-if (!result) {
-  return <div>Property not found</div>;
-}
+    if (!result?.propertyId && !result?.id) {
+        return (
+            <div className="flex items-center justify-center min-h-[50vh] px-4">
+                <p className="text-neutral-600">Property not found.</p>
+            </div>
+        );
+    }
 
     return (
         <div className="flex flex-col w-full h-[calc(100vh-64px)] overflow-y-auto scrollbar-hide">
@@ -136,14 +140,14 @@ if (!result) {
                                                 </span>
                                             </div>
                                         </div>
-                                        {result.overlooking.length > 0 && (
+                                        {overlooking.length > 0 && (
                                             <div className="flex gap-1 w-full col-span-2 md:col-span-1">
                                                 <div className="flex flex-col w-fit">
                                                     <span className="font-thin text-sm md:text-base">
                                                         Overlooking:
                                                     </span>
                                                     <p className="font-medium text-neutral-700 text-sm gap-2 flex md:text-base flex-wrap">
-                                                        {result.overlooking.map(
+                                                        {overlooking.map(
                                                             (item, i) => (
                                                                 <span key={i}>
                                                                     {item},
@@ -234,25 +238,25 @@ if (!result) {
                                         </span>
                                     </div>
                                 )}
-                                {result.amenities.length > 0 && (
+                                {amenities.length > 0 && (
                                     <div className="grid grid-cols-3 md:grid-cols-4 text-sm md:text-base w-full gap-2">
                                         <span className="w-full font-thin">
                                             Amenities
                                         </span>
                                         <span className="flex w-full col-span-2 gap-2 md:col-span-3 items-center font-medium text-neutral-700  flex-wrap">
-                                            {result.amenities.map((item, i) => (
+                                            {amenities.map((item, i) => (
                                                 <span key={i}>{item}, </span>
                                             ))}
                                         </span>
                                     </div>
                                 )}
-                                {result.locationAdvantages.length > 0 && (
+                                {locationAdvantages.length > 0 && (
                                     <div className="grid grid-cols-3 md:grid-cols-4 text-sm md:text-base w-full gap-2">
                                         <span className="w-full font-thin">
                                             Location Advantages
                                         </span>
                                         <span className="flex w-full col-span-2 gap-2 md:col-span-3 items-center font-medium text-neutral-700 ">
-                                            {result.locationAdvantages.map(
+                                            {locationAdvantages.map(
                                                 (item, i) => (
                                                     <span key={i}>
                                                         {item},{" "}

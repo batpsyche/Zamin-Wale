@@ -3,9 +3,10 @@
 import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
 
-const getToken = (tokenType = "access") => {
+const getToken = async (tokenType = "access") => {
 	try {
-		const token = cookies().get(`${process.env.NEXT_PUBLIC_COOKIE_KEY}_${tokenType}`);
+		const cookieStore = await cookies();
+		const token = cookieStore.get(`${process.env.NEXT_PUBLIC_COOKIE_KEY}_${tokenType}`);
 		if (!token) {
 			console.error(`Token of type ${tokenType} not found in cookies.`);
 			return null;
@@ -18,10 +19,11 @@ const getToken = (tokenType = "access") => {
 	}
 };
 
-const handleTokenRefreshFailure = () => {
+const handleTokenRefreshFailure = async () => {
 	try {
 		const cookieKey = process.env.NEXT_PUBLIC_COOKIE_KEY;
-		cookies().delete(`${cookieKey}_access`);
+		const cookieStore = await cookies();
+		cookieStore.delete(`${cookieKey}_access`);
 		console.log("Access token deleted due to refresh failure.");
 	} catch (error) {
 		console.error("Error handling token refresh failure:", error);
@@ -61,6 +63,11 @@ const customFetch = async (
 	tokenType = "access"
 ) => {
 	try {
+		if (!baseUrl || baseUrl === "undefined") {
+			throw new Error(
+				"API_URL is not set. Add API_URL to .env.local (e.g. API_URL=https://zaminwale-api.onrender.com/api/v1)"
+			);
+		}
 		const headers = {
 			...(options.headers || {}),
 		};
@@ -122,7 +129,7 @@ const customFetch = async (
 
 		if (!res.ok) {
 			if (res.status === 401) {
-				handleTokenRefreshFailure();
+				await handleTokenRefreshFailure();
 				throw new Error("Token expired. Please reauthenticate.");
 			}
 			const errorMessage = responseContent?.results?.data?.error || "API error occurred";
@@ -137,8 +144,13 @@ const customFetch = async (
 	}
 };
 
+const getApiBaseUrl = () => {
+	const url = process.env.API_URL || "https://zaminwale-api.onrender.com/api/v1";
+	return url.replace(/\/$/, ""); // ensure no trailing slash
+};
+
 export const fetchWithToken = async (endpoint, options = {}) =>
-	customFetch(process.env.API_URL, endpoint, options, "access");
+	customFetch(getApiBaseUrl(), endpoint, options, "access");
 
 export const fetchWithoutToken = async (endpoint, options = {}) =>
-	customFetch(process.env.API_URL, endpoint, options, null);
+	customFetch(getApiBaseUrl(), endpoint, options, null);

@@ -1,4 +1,4 @@
-import PopupEnquiry from "@/components/molecules/PopupEnquiry";
+import PopupEnquiryGate from "@/components/molecules/PopupEnquiryGate";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 import { Open_Sans, Rubik } from "next/font/google";
@@ -84,14 +84,14 @@ export default function MainLayout({ children }) {
         <html lang="en" suppressHydrationWarning>
             <body
                 className={cn(
-                    "h-screen flex flex-col font-rubik w-screen overflow-hidden ",
+                    "h-screen flex flex-col font-rubik w-screen overflow-x-hidden overflow-y-auto",
                     rubik.variable
                 )}
             >
                 <Analytics />
                 <div className="flex relative w-full flex-1 flex-col">
                     {children}
-                    <PopupEnquiry />
+                    <PopupEnquiryGate />
                 </div>
                 <Toaster richColors />
             </body>

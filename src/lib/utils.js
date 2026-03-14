@@ -1,6 +1,10 @@
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
+/** Placeholder image when property has no photo. Use with Next/Image. */
+export const PLACEHOLDER_IMAGE =
+    "https://placehold.co/800x600/eee/999?text=Property&font=source-sans-3";
+
 export function cn(...inputs) {
     return twMerge(clsx(inputs));
 }
