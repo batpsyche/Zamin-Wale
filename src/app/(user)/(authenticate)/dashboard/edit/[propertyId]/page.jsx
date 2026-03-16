@@ -34,6 +34,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
+import { normalizeMediaUrl } from "@/lib/media";
 
 const EditSchema = z.object({
     listingType: z.enum(["Sell", "Rent/Lease"], {
@@ -208,11 +209,11 @@ const Page = () => {
                 isPriceNegotiable: result?.isPriceNegotiable || false,
                 uniqueFeatures: result?.uniqueFeatures || "",
                 propertyVideo: result?.propertyVideo ? `https://www.youtube.com/embed/${result?.propertyVideo}` : null || "",
-                image1: result?.propertyPhotos[0] || "",
-                image2: result?.propertyPhotos[1] || "",
-                image3: result?.propertyPhotos[2] || "",
-                image4: result?.propertyPhotos[3] || "",
-                image5: result?.propertyPhotos[4] || "",
+                image1: normalizeMediaUrl(result?.propertyPhotos?.[0]) || "",
+                image2: normalizeMediaUrl(result?.propertyPhotos?.[1]) || "",
+                image3: normalizeMediaUrl(result?.propertyPhotos?.[2]) || "",
+                image4: normalizeMediaUrl(result?.propertyPhotos?.[3]) || "",
+                image5: normalizeMediaUrl(result?.propertyPhotos?.[4]) || "",
                 amenities: result?.amenities || [],
                 overlooking: result?.overlooking || [],
                 otherFeatures: result?.otherFeatures || "",
@@ -234,7 +235,14 @@ const Page = () => {
         const formData = new FormData();
         formData.append("file", file);
         const fileResp = await uploadPropertyImage({ body: formData });
-        const uploadedImageUrl = fileResp;
+        const uploadedImageUrl =
+            fileResp?.url ??
+            fileResp?.data?.url ??
+            (typeof fileResp === "string" ? fileResp : null);
+        if (!uploadedImageUrl) {
+            toast.error("Upload did not return a valid URL");
+            return;
+        }
         form.setValue(fieldName, uploadedImageUrl);
     };
 

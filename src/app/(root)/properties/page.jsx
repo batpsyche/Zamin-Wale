@@ -8,6 +8,7 @@ import { formatCurrency } from "@/lib/utils";
 import { format } from "date-fns";
 import { IndianRupeeIcon } from "lucide-react";
 import Image from "next/image";
+import { normalizeMediaUrl } from "@/lib/media";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -103,10 +104,11 @@ const page = () => {
                                 >
                                     <div className="relative aspect-video bg-cover rounded-t-lg flex w-full overflow-hidden">
                                         <Image
-                                            src={
-                                                (property.propertyPhotos?.[0] && String(property.propertyPhotos[0]).trim()) ||
-                                                "https://placehold.co/800x600/eee/999?text=Property&font=source-sans-3"
-                                            }
+                                            src={normalizeMediaUrl(
+                                                (property.propertyPhotos?.[0] &&
+                                                    String(property.propertyPhotos[0]).trim()) ||
+                                                    "https://placehold.co/800x600/eee/999?text=Property&font=source-sans-3"
+                                            )}
                                             alt="house"
                                             fill
                                             className="rounded-t-lg group-hover:scale-110 transition-all object-cover"

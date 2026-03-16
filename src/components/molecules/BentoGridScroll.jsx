@@ -1,6 +1,7 @@
 "use client";
 
 import { cn, formatCurrency, PLACEHOLDER_IMAGE } from "@/lib/utils";
+import { normalizeMediaUrl } from "@/lib/media";
 import Autoplay from "embla-carousel-autoplay";
 import { IndianRupee } from "lucide-react";
 import Image from "next/image";
@@ -21,7 +22,9 @@ import {
 
 const BentoGridScroll = ({ cards }) => {
     const photos = Array.isArray(cards.propertyPhotos)
-        ? cards.propertyPhotos.filter((src) => src && String(src).trim())
+        ? cards.propertyPhotos
+              .filter((src) => src && String(src).trim())
+              .map((src) => normalizeMediaUrl(String(src).trim()))
         : [];
     const safePhotos = photos.length ? photos : [PLACEHOLDER_IMAGE];
 

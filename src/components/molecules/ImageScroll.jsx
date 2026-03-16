@@ -2,10 +2,17 @@ import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
 import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel";
 import { cn, PLACEHOLDER_IMAGE } from "@/lib/utils";
+import { normalizeMediaUrl } from "@/lib/media";
 
 const ImageScroll = ({ card, isHovered, className }) => {
-    const photos = Array.isArray(card) ? card.filter(Boolean) : [];
-    const firstSrc = photos[0] || PLACEHOLDER_IMAGE;
+    const photos = Array.isArray(card)
+        ? card
+              .filter(Boolean)
+              .map((src) =>
+                  normalizeMediaUrl(typeof src === "string" ? src : String(src))
+              )
+        : [];
+    const firstSrc = photos[0] || normalizeMediaUrl(PLACEHOLDER_IMAGE);
     const fallbackSrc = "/assets/recommonded-property/recomonded-property1.jpeg";
 
     return (

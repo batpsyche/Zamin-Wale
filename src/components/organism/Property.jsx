@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import SectionHeading from "../atoms/SectionHeading";
 import SkeletonCard from "../atoms/SkeletonCard";
 import ImageScroll from "../molecules/ImageScroll";
+import { normalizeMediaUrl } from "@/lib/media";
 import { Button } from "../ui/button";
 import {
     Carousel,
@@ -85,10 +86,18 @@ const Property = () => {
                                                 onMouseLeave={handleMouseLeave}
                                             >
                                                 <ImageScroll
-                                                    card={card.propertyPhotos}
-                                                    isHovered={
-                                                        hoveredIndex === index
+                                                    card={
+                                                        Array.isArray(card.propertyPhotos)
+                                                            ? card.propertyPhotos.map((src) =>
+                                                                  normalizeMediaUrl(
+                                                                      typeof src === "string"
+                                                                          ? src
+                                                                          : String(src)
+                                                                  )
+                                                              )
+                                                            : card.propertyPhotos
                                                     }
+                                                    isHovered={hoveredIndex === index}
                                                 />
                                                 <div className="p-2 sm:p-4 relative space-y-2">
                                                     <div className="w-full">
