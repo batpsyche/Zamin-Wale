@@ -24,6 +24,11 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const PropertyDetailsSchema = z.object({
+    title: z
+        .string({
+            required_error: "Please enter a title for this property.",
+        })
+        .min(3, { message: "Title must be at least 3 characters." }),
     plotArea: z.string({
         required_error: "Please enter area.",
     }),
@@ -159,13 +164,30 @@ const PropertyProfile = ({
                     onSubmit={form.handleSubmit(onSubmit)}
                     className="h-fit w-full"
                 >
-                    <div className="flex h-fit gap-10 flex-col w-full">
+                        <div className="flex h-fit gap-10 flex-col w-full">
                         <div className="flex flex-col w-full">
                             <span className="text-xl md:text-2xl font-semibold">
                                 Tell us about your property
                             </span>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+                            <FormField
+                                control={form.control}
+                                name="title"
+                                render={({ field }) => (
+                                    <FormItem className="flex flex-col gap-2 md:col-span-2">
+                                        <FormLabel>Title</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                placeholder="Short title for this property (e.g. 1500 sqft plot in Uran)"
+                                                {...field}
+                                                value={field.value ?? ""}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
                             <FormField
                                 control={form.control}
                                 name="plotArea"

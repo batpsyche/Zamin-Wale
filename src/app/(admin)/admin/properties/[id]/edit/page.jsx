@@ -33,6 +33,11 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 const EditSchema = z.object({
+    title: z
+        .string({
+            required_error: "Please enter a title for this property.",
+        })
+        .min(3, { message: "Title must be at least 3 characters." }),
     listingType: z.enum(["Sell", "Rent/Lease"], {
         required_error: "You need to select type.",
     }),
@@ -141,6 +146,7 @@ const Page = () => {
     const form = useForm({
         resolver: zodResolver(EditSchema),
         defaultValues: {
+            title: "",
             listingType: "",
             propertyType: "",
             propertyCategories: "",
@@ -186,6 +192,7 @@ const Page = () => {
             const result = (await getOneProperty(propertyId)) ?? {};
             const photos = Array.isArray(result?.propertyPhotos) ? result.propertyPhotos : [];
             reset({
+                title: result?.title || "",
                 listingType: result?.listingType || "",
                 propertyType: result?.propertyType || "",
                 propertyCategories: result?.propertyCategories || "",
@@ -242,6 +249,14 @@ const Page = () => {
         setLoading(true);
         const body = {
             ...values,
+            priceTotal:
+                values.priceTotal !== undefined && values.priceTotal !== ""
+                    ? values.priceTotal
+                    : null,
+            pricePerSQFT:
+                values.pricePerSQFT !== undefined && values.pricePerSQFT !== ""
+                    ? values.pricePerSQFT
+                    : null,
             propertyId: propertyId,
             propertyVideo: extractYouTubeVideoID(values.propertyVideo),
             propertyPhotos: [
@@ -862,6 +877,23 @@ const Page = () => {
                             />
                             <div className="flex w-full gap-4 flex-col">
                                 <FormLabel>{Data[12].label}</FormLabel>
+                                <FormField
+                                    control={form.control}
+                                    name="title"
+                                    render={({ field }) => (
+                                        <FormItem className="flex flex-col gap-2">
+                                            <FormLabel>Title</FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    placeholder="Short title for this property"
+                                                    {...field}
+                                                    value={field.value ?? ""}
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
                                     <FormField
                                         control={form.control}
