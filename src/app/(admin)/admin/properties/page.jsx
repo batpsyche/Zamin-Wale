@@ -109,6 +109,13 @@ export default function AdminPropertiesPage() {
                         >
                             Log out
                         </Button>
+                        <Button
+                            asChild
+                            size="sm"
+                            className="bg-[#6f272b] text-white hover:bg-[#5a2023]"
+                        >
+                            <Link href="/admin/properties/create">Add property</Link>
+                        </Button>
                         <Button asChild variant="outline" size="sm">
                             <Link href="/">View site</Link>
                         </Button>

@@ -17,14 +17,27 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-const PhotosNVideoSchema = z.object({
-    propertyVideo: z.string().optional().nullable(),
-    image1: z.string().optional(),
-    image2: z.string().optional(),
-    image3: z.string().optional(),
-    image4: z.string().optional(),
-    image5: z.string().optional(),
-});
+const PhotosNVideoSchema = z
+    .object({
+        propertyVideo: z.string().optional().nullable(),
+        image1: z.string().optional(),
+        image2: z.string().optional(),
+        image3: z.string().optional(),
+        image4: z.string().optional(),
+        image5: z.string().optional(),
+    })
+    .refine(
+        (data) =>
+            !!(data.image1 && data.image1.trim()) ||
+            !!(data.image2 && data.image2.trim()) ||
+            !!(data.image3 && data.image3.trim()) ||
+            !!(data.image4 && data.image4.trim()) ||
+            !!(data.image5 && data.image5.trim()),
+        {
+            message: "Please upload at least one image.",
+            path: ["image1"],
+        }
+    );
 
 const PhotoNVideo = ({ onSubmit, prev, currentStep, loading, formData }) => {
     const form = useForm({
@@ -43,7 +56,14 @@ const PhotoNVideo = ({ onSubmit, prev, currentStep, loading, formData }) => {
         if (!fileResp) {
             toast.error("Upload Failed");
         }
-        const uploadedImageUrl = fileResp;
+        const uploadedImageUrl =
+            fileResp?.url ??
+            fileResp?.data?.url ??
+            (typeof fileResp === "string" ? fileResp : null);
+        if (!uploadedImageUrl) {
+            toast.error("Upload did not return a valid URL");
+            return;
+        }
         form.setValue(fieldName, uploadedImageUrl);
     };
 

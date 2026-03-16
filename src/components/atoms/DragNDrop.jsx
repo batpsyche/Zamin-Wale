@@ -203,7 +203,7 @@ const DragNDrop = ({
                     ) : formatType === "image" ? (
                         <>
                             <div className="relative aspect-video h-full w-full border border-neutral-200 dark:border-neutral-700">
-                                {fileLink?.endsWith(".mp4") ? (
+                                {typeof fileLink === "string" && fileLink.endsWith(".mp4") ? (
                                     <video
                                         src={fileLink}
                                         className="object-contain transition-all duration-300 group-hover:opacity-50 group-hover:blur-sm"
