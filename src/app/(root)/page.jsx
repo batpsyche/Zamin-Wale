@@ -21,7 +21,7 @@ const page = () => {
             <TopLocations />
             <RecommendedProperty />
             <DreamPlots />
-            <About />
+            {/* About section hidden for now */}
             <TrendingNews />
             <Footer />
         </>

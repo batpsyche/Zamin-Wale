@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 const About = () => {
     return (
         <div className="w-full flex items-center justify-center">
-            <div className="flex flex-col w-full max-w-[1360px] min-w-7xl mx-auto border-t-4 border-[#6f272b] shadow-xl md:mx-8 rounded-3xl">
+            <div className="flex flex-col w-full max-w-[1360px] mx-4 md:mx-8 border-t-4 border-[#6f272b] shadow-xl rounded-3xl">
                 <div className="flex flex-col max-w-7xl mx-auto gap-8 md:gap-10 px-4 py-4 md:py-6 lg:py-8 xl:py-14">
                     <div className="flex w-full items-center justify-center">
                         <h2 className="text-xl text-black font-semibold md:text-2xl lg:text-3xl">
