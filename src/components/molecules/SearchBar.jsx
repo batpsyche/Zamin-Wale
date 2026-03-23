@@ -73,6 +73,10 @@ const SearchData = [
                 label: "Karjat",
                 value: "karjat",
             },
+            {
+                label: "Alibaug",
+                value: "alibaug",
+            },
         ],
     },
 ];
@@ -110,19 +114,19 @@ const SearchBar = () => {
             <Form {...form} className="w-full">
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}
-                    className="flex flex-col w-full items-center justify-center"
+                    className="flex w-full flex-col items-center justify-center"
                 >
                     <div className="flex w-full text-sm md:text-base">
                         <FormField
                             control={form.control}
                             name="propertyType"
                             render={({ field }) => (
-                                <FormItem className="flex flex-col gap-2 w-full">
+                                <FormItem className="flex w-full flex-col gap-2">
                                     <FormControl>
                                         <RadioGroup
                                             onValueChange={field.onChange}
                                             value={field.value}
-                                            className="flex  gap-1 items-center justify-center md:grid grid-cols-4 h-10 md:h-14 w-full"
+                                            className="flex h-10 w-full grid-cols-4 items-center justify-center gap-1 md:grid md:h-14"
                                         >
                                             {SearchData[0].data.map(
                                                 ({ value, label }) => (
@@ -140,7 +144,7 @@ const SearchBar = () => {
                                                                 value={value}
                                                             />
                                                         </FormControl>
-                                                        <FormLabel className="font-normal md:font-medium md:text-lg">
+                                                        <FormLabel className="font-normal md:text-lg md:font-medium">
                                                             {label}
                                                         </FormLabel>
                                                     </FormItem>
@@ -152,7 +156,7 @@ const SearchBar = () => {
                             )}
                         />
                     </div>
-                    <div className="flex bg-white border md:border-neutral-200 md:bg-none rounded-3xl md:rounded-2xl w-full px-1 md:px-3 h-12 md:h-14 items-center">
+                    <div className="flex h-12 w-full items-center rounded-3xl border bg-white px-1 md:h-14 md:rounded-2xl md:border-neutral-200 md:bg-none md:px-3">
                         <FormField
                             control={form.control}
                             name="location"
@@ -165,7 +169,7 @@ const SearchBar = () => {
                                         <FormControl>
                                             <SelectTrigger
                                                 icon={false}
-                                                className="border-none ring-white focus:ring-white focus:border-none outline-none"
+                                                className="border-none outline-none ring-white focus:border-none focus:ring-white"
                                             >
                                                 <SelectValue
                                                     placeholder={`${
