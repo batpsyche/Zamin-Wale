@@ -296,9 +296,9 @@ const Page = () => {
             ?.data || [];
 
     return (
-        <div className="flex w-full h-full relative">
-            <div className="absolute top-0 left-0 flex w-full rounded-lg h-full overflow-x-hidden overflow-y-auto scrollbar md:p-4">
-                <div className="w-full flex flex-col h-fit">
+        <div className="relative flex h-full w-full">
+            <div className="absolute left-0 top-0 flex h-full w-full overflow-y-auto overflow-x-hidden rounded-lg scrollbar md:p-4">
+                <div className="flex h-fit w-full flex-col">
                     <Form {...form}>
                         <form
                             onSubmit={form.handleSubmit(onSubmit)}
@@ -436,7 +436,7 @@ const Page = () => {
                                 />
                             )}
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                                 <FormField
                                     control={form.control}
                                     name="city"
@@ -524,7 +524,7 @@ const Page = () => {
                                     )}
                                 />
                             </div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                                 <FormField
                                     control={form.control}
                                     name="plotArea"
@@ -589,9 +589,9 @@ const Page = () => {
                                     )}
                                 />
                             </div>
-                            <div className="flex w-full gap-4 flex-col">
+                            <div className="flex w-full flex-col gap-4">
                                 <FormLabel>{Data[5].label}</FormLabel>
-                                <div className="grid grid-cols-2 gap-4 w-full">
+                                <div className="grid w-full grid-cols-2 gap-4">
                                     <FormField
                                         control={form.control}
                                         name="length"
@@ -650,7 +650,7 @@ const Page = () => {
                                     </FormItem>
                                 )}
                             />
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                                 <FormField
                                     control={form.control}
                                     name="hasBoundaryWall"
@@ -744,7 +744,7 @@ const Page = () => {
                                     )}
                                 />
                             </div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                                 <FormField
                                     control={form.control}
                                     name="hasConstruction"
@@ -875,7 +875,7 @@ const Page = () => {
                                     </FormItem>
                                 )}
                             />
-                            <div className="flex w-full gap-4 flex-col">
+                            <div className="flex w-full flex-col gap-4">
                                 <FormLabel>{Data[12].label}</FormLabel>
                                 <FormField
                                     control={form.control}
@@ -894,7 +894,7 @@ const Page = () => {
                                         </FormItem>
                                     )}
                                 />
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+                                <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
                                     <FormField
                                         control={form.control}
                                         name="priceTotal"
@@ -935,7 +935,7 @@ const Page = () => {
                                     />
                                 </div>
                             </div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 w-full">
+                            <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
                                 <FormField
                                     control={form.control}
                                     name="inclusivePrice"
@@ -1029,7 +1029,7 @@ const Page = () => {
                                     </FormItem>
                                 )}
                             />
-                            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-10 lg:gap-y-20 w-full">
+                            <div className="grid w-full grid-cols-1 gap-x-4 gap-y-10 md:grid-cols-2 lg:gap-y-20 xl:grid-cols-3">
                                 <FormField
                                     control={form.control}
                                     name="image1"
@@ -1147,7 +1147,7 @@ const Page = () => {
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>{Data[14]?.label}</FormLabel>
-                                        <div className="flex gap-2 flex-wrap">
+                                        <div className="flex flex-wrap gap-2">
                                             {(Data[14]?.data || []).map(
                                                 (item) => (
                                                     <FormField
@@ -1213,7 +1213,7 @@ const Page = () => {
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>{Data[15]?.label}</FormLabel>
-                                        <div className="flex gap-2 flex-wrap">
+                                        <div className="flex flex-wrap gap-2">
                                             {(Data[15]?.data || []).map(
                                                 (item) => (
                                                     <FormField
@@ -1360,7 +1360,7 @@ const Page = () => {
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>{Data[18]?.label}</FormLabel>
-                                        <div className="flex gap-2 flex-wrap">
+                                        <div className="flex flex-wrap gap-2">
                                             {(Data[18]?.data || []).map(
                                                 (item) => (
                                                     <FormField
@@ -1424,7 +1424,7 @@ const Page = () => {
                             <div className="flex gap-3">
                                 <Button
                                     type="submit"
-                                    className="px-4 py-2 bg-[#6f272b] text-white rounded-lg"
+                                    className="rounded-lg bg-[#6f272b] px-4 py-2 text-white"
                                     disabled={loading}
                                 >
                                     {loading ? <Loading /> : "Update Property"}
@@ -1432,7 +1432,7 @@ const Page = () => {
                                 <Button
                                     type="button"
                                     variant="destructive"
-                                    className="px-4 py-2 rounded-lg"
+                                    className="rounded-lg px-4 py-2"
                                     disabled={loading}
                                     onClick={handleDelete}
                                 >
@@ -1507,6 +1507,9 @@ const Data = [
             { label: "Ranjanpada", value: "Ranjanpada" },
             { label: "Vindhane", value: "Vindhane" },
             { label: "Karjat", value: "Karjat" },
+            { label: "Alibaug", value: "Alibaug" },
+            { label: "Khopoli Pali Road", value: "Khopoli Pali Road" },
+            { label: "Palghar", value: "Palghar" },
         ],
     },
     {

@@ -167,6 +167,10 @@ const NavItems = [
                 link: "/search/top-location/thane",
             },
             {
+                label: "Plot in Alibaug",
+                link: "/search/top-location/alibaug",
+            },
+            {
                 label: "Plot in Panvel",
                 link: "/search/top-location/panvel",
             },
@@ -188,7 +192,7 @@ const NavItems = [
             },
             {
                 label: "Plot in Karjat",
-                link: "/search/top-location/Karjat",
+                link: "/search/top-location/karjat",
             },
         ],
     },

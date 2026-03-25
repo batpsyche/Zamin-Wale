@@ -29,6 +29,7 @@ import {
 
 const Location = [
     { all: "All" },
+    { alibaug: "alibaug" },
     { thane: "Thane" },
     { panvel: "Panvel" },
     { uran: "Uran" },
@@ -39,12 +40,17 @@ const Location = [
 ];
 
 const SearchTrigger = (locationId) => {
+    // URL slugs may differ in casing (e.g. `Karjat` vs `karjat`)
+    // Normalize so we can still find the correct locality.
+    const normalizedLocationId =
+        typeof locationId === "string" ? locationId.toLowerCase() : locationId;
+
     const matchingLocation = Location.find((loc) =>
-        Object.keys(loc).includes(locationId)
+        Object.prototype.hasOwnProperty.call(loc, normalizedLocationId)
     );
 
     if (matchingLocation) {
-        return matchingLocation[locationId];
+        return matchingLocation[normalizedLocationId];
     } else {
         console.warn(`No matching location found for: ${locationId}`);
         return null;
@@ -1258,6 +1264,10 @@ const FilterData = [
             {
                 label: "All",
                 value: "All",
+            },
+            {
+                label: "Alibaug",
+                value: "alibaug",
             },
             {
                 label: "Thane",
