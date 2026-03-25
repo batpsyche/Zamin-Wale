@@ -31,6 +31,10 @@ const page = () => {
     const [hoveredIndex, setHoveredIndex] = useState(null);
     const searchList = useZaminwaleStore((store) => store.searchList);
     const isLoading = searchList === null;
+    const headingLocality =
+        Array.isArray(searchList) && searchList.length > 0
+            ? searchList[0]?.locality
+            : params.locationId;
 
     const handleMouseEnter = (index) => {
         setHoveredIndex(index);
@@ -72,7 +76,7 @@ const page = () => {
                     </div>
                     <div className="gap-2 text-sm md:text-lg font-semibold w-full">
                         <span className="">{searchList?.length ?? 0}</span> Result |{" "}
-                        <span className="capitalize">{params.locationId}</span>
+                        <span className="capitalize">{headingLocality}</span>
                     </div>
                 </div>
                 {!isLoading ? (
