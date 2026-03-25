@@ -37,6 +37,7 @@ const Location = [
     { ranjanpada: "Ranjanpada" },
     { vindhane: "Vindhane" },
     { karjat: "Karjat" },
+    { khopoliPaliRoad: "Khopoli Pali Road" },
 ];
 
 const SearchTrigger = (locationId) => {
@@ -174,7 +175,7 @@ const SearchFilter = () => {
 
     return (
         <>
-            <div className="flex relative flex-col h-fit divide-y w-full p-4">
+            <div className="relative flex h-fit w-full flex-col divide-y p-4">
                 <Form {...form}>
                     <form
                         onSubmit={form.handleSubmit(onSubmit)}
@@ -182,7 +183,7 @@ const SearchFilter = () => {
                     >
                         <Button
                             type="submit"
-                            className="px-4 w-full py-2 bg-[#6f272b] text-white rounded-lg"
+                            className="w-full rounded-lg bg-[#6f272b] px-4 py-2 text-white"
                         >
                             Apply Filter
                         </Button>
@@ -215,7 +216,7 @@ const SearchFilter = () => {
                                                                 }
                                                             />
                                                         </FormControl>
-                                                        <FormLabel className="font-normal flex gap-2">
+                                                        <FormLabel className="flex gap-2 font-normal">
                                                             {field.value ===
                                                                 item.value ? (
                                                                 <CheckIcon className="!size-3" />
@@ -262,7 +263,7 @@ const SearchFilter = () => {
                                                                 }
                                                             />
                                                         </FormControl>
-                                                        <FormLabel className="font-normal flex gap-2">
+                                                        <FormLabel className="flex gap-2 font-normal">
                                                             {field.value ===
                                                                 item.value ? (
                                                                 <CheckIcon className="!size-3" />
@@ -309,7 +310,7 @@ const SearchFilter = () => {
                                                                 }
                                                             />
                                                         </FormControl>
-                                                        <FormLabel className="font-normal flex gap-2">
+                                                        <FormLabel className="flex gap-2 font-normal">
                                                             {field.value ===
                                                                 item.value ? (
                                                                 <CheckIcon className="!size-3" />
@@ -356,7 +357,7 @@ const SearchFilter = () => {
                                                                 }
                                                             />
                                                         </FormControl>
-                                                        <FormLabel className="font-normal flex gap-2">
+                                                        <FormLabel className="flex gap-2 font-normal">
                                                             {field.value ===
                                                                 item.value ? (
                                                                 <CheckIcon className="!size-3" />
@@ -374,9 +375,9 @@ const SearchFilter = () => {
                                 </FormItem>
                             )}
                         />
-                        <div className="flex flex-col py-4 gap-4 w-full">
+                        <div className="flex w-full flex-col gap-4 py-4">
                             <FormLabel>{FilterData[4].label}</FormLabel>
-                            <div className="grid grid-cols-2 w-full gap-2">
+                            <div className="grid w-full grid-cols-2 gap-2">
                                 <FormField
                                     control={form.control}
                                     name="priceTotalMinValue"
@@ -463,9 +464,9 @@ const SearchFilter = () => {
                                 />
                             </div>
                         </div>
-                        {/* <div className="flex flex-col py-4 gap-4 w-full">
+                        {/* <div className="flex w-full flex-col gap-4 py-4">
                             <FormLabel>{FilterData[19].label}</FormLabel>
-                            <div className="grid grid-cols-2 w-full gap-2">
+                            <div className="grid w-full grid-cols-2 gap-2">
                                 <FormField
                                     control={form.control}
                                     name="plotAreaMinValue"
@@ -553,7 +554,7 @@ const SearchFilter = () => {
                                                                 }
                                                             />
                                                         </FormControl>
-                                                        <FormLabel className="font-normal flex gap-2">
+                                                        <FormLabel className="flex gap-2 font-normal">
                                                             {field.value ===
                                                                 item.value ? (
                                                                 <CheckIcon className="!size-3" />
@@ -594,7 +595,7 @@ const SearchFilter = () => {
                                                     <FormControl className="sr-only">
                                                         <RadioGroupItem value={item.value} />
                                                     </FormControl>
-                                                    <FormLabel className="font-normal flex gap-2">
+                                                    <FormLabel className="flex gap-2 font-normal">
                                                         {field.value === item.value ? (
                                                             <CheckIcon className="!size-3" />
                                                         ) : (
@@ -639,7 +640,7 @@ const SearchFilter = () => {
                                                                 }
                                                             />
                                                         </FormControl>
-                                                        <FormLabel className="font-normal flex gap-2">
+                                                        <FormLabel className="flex gap-2 font-normal">
                                                             {field.value ===
                                                                 item.value ? (
                                                                 <CheckIcon className="!size-3" />
@@ -680,7 +681,7 @@ const SearchFilter = () => {
                                                     <FormControl className="sr-only">
                                                         <RadioGroupItem value={item.value} />
                                                     </FormControl>
-                                                    <FormLabel className="font-normal flex gap-2">
+                                                    <FormLabel className="flex gap-2 font-normal">
                                                         {field.value === item.value ? (
                                                             <CheckIcon className="!size-3" />
                                                         ) : (
@@ -725,7 +726,7 @@ const SearchFilter = () => {
                                                                 }
                                                             />
                                                         </FormControl>
-                                                        <FormLabel className="font-normal flex gap-2">
+                                                        <FormLabel className="flex gap-2 font-normal">
                                                             {field.value ===
                                                                 item.value ? (
                                                                 <CheckIcon className="!size-3" />
@@ -774,7 +775,7 @@ const SearchFilter = () => {
                                                                 }
                                                             />
                                                         </FormControl>
-                                                        <FormLabel className="font-normal flex gap-2">
+                                                        <FormLabel className="flex gap-2 font-normal">
                                                             {field.value ===
                                                                 item.value ? (
                                                                 <CheckIcon className="!size-3" />
@@ -815,7 +816,7 @@ const SearchFilter = () => {
                                                     <FormControl className="sr-only">
                                                         <RadioGroupItem value={item.value} />
                                                     </FormControl>
-                                                    <FormLabel className="font-normal flex gap-2">
+                                                    <FormLabel className="flex gap-2 font-normal">
                                                         {field.value === item.value ? (
                                                             <CheckIcon className="!size-3" />
                                                         ) : (
@@ -854,7 +855,7 @@ const SearchFilter = () => {
                                                     <FormControl className="sr-only">
                                                         <RadioGroupItem value={item.value} />
                                                     </FormControl>
-                                                    <FormLabel className="font-normal flex gap-2">
+                                                    <FormLabel className="flex gap-2 font-normal">
                                                         {field.value === item.value ? (
                                                             <CheckIcon className="!size-3" />
                                                         ) : (
@@ -893,7 +894,7 @@ const SearchFilter = () => {
                                                     <FormControl className="sr-only">
                                                         <RadioGroupItem value={item.value} />
                                                     </FormControl>
-                                                    <FormLabel className="font-normal flex gap-2">
+                                                    <FormLabel className="flex gap-2 font-normal">
                                                         {field.value === item.value ? (
                                                             <CheckIcon className="!size-3" />
                                                         ) : (
@@ -981,7 +982,7 @@ const SearchFilter = () => {
                                     <FormLabel>
                                         {FilterData[15].label}
                                     </FormLabel>
-                                    <div className="flex gap-2 flex-wrap">
+                                    <div className="flex flex-wrap gap-2">
                                         {FilterData[15].data.map((item) => (
                                             <FormField
                                                 key={item.value}
@@ -1181,7 +1182,7 @@ const SearchFilter = () => {
                         />
                         <Button
                             type="submit"
-                            className="px-4 w-full py-2 bg-[#6f272b] text-white rounded-lg"
+                            className="w-full rounded-lg bg-[#6f272b] px-4 py-2 text-white"
                         >
                             Apply Filter
                         </Button>
@@ -1300,6 +1301,10 @@ const FilterData = [
             {
                 label: "Karjat",
                 value: "Karjat",
+            },
+            {
+                label: "Khopoli Pali Road",
+                value: "khopoli-pali-road",
             },
         ],
     },
