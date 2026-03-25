@@ -48,6 +48,8 @@ const Step2Data = [
             { label: "Vindhane", value: "Vindhane" },
             { label: "Karjat", value: "Karjat" },
             { label: "Palghar", value: "palghar" },
+            { label: "Alibaug", value: "alibaug" },
+            { label: "Khopoli Pali Road", value: "khopoli-pali-road" },
         ],
     },
 ];
@@ -68,9 +70,9 @@ const LocationDetails = ({
         <>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
-                    <div className="flex flex-1 gap-10 flex-col w-full">
-                        <div className="flex gap-1 flex-col w-full">
-                            <span className="text-xl md:text-2xl font-semibold">
+                    <div className="flex w-full flex-1 flex-col gap-10">
+                        <div className="flex w-full flex-col gap-1">
+                            <span className="text-xl font-semibold md:text-2xl">
                                 Where is your property located
                             </span>
                             <span className="text-sm md:text-base">
@@ -146,17 +148,17 @@ const LocationDetails = ({
                                 </FormItem>
                             )}
                         />
-                        <div className="flex w-full mt-4">
+                        <div className="mt-4 flex w-full">
                             <Button
                                 onClick={prev}
-                                className="px-4 py-2 bg-gray-300 text-black rounded-lg mr-4"
+                                className="mr-4 rounded-lg bg-gray-300 px-4 py-2 text-black"
                                 disabled={currentStep === 0}
                             >
                                 <ArrowLeft />
                             </Button>
                             <Button
                                 type="submit"
-                                className="px-4 py-2 bg-[#6f272b] text-white rounded-lg"
+                                className="rounded-lg bg-[#6f272b] px-4 py-2 text-white"
                                 disabled={loading}
                             >
                                 {loading ? "Loading" : "Continue"}
