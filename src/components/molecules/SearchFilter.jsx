@@ -120,8 +120,17 @@ const SearchFilter = () => {
     });
 
     const onSubmit = async (values) => {
+        const normalizedLocality =
+            typeof values?.locality === "string"
+                ? SearchTrigger(values.locality) || values.locality
+                : values?.locality;
+        const normalizedValues = {
+            ...values,
+            locality: normalizedLocality,
+        };
+
         try {
-            const resp = await filterProperty(values);
+            const resp = await filterProperty(normalizedValues);
             dispatch({
                 type: "SET_STATE",
                 payload: { searchList: resp.result },
