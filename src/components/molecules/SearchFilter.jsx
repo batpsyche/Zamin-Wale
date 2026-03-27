@@ -37,7 +37,7 @@ const Location = [
     { ranjanpada: "Ranjanpada" },
     { vindhane: "Vindhane" },
     { karjat: "Karjat" },
-    { khopoliPaliRoad: "Khopoli Pali Road" },
+    { khopoliPaliRoad: "khopoli-pali-road" },
 ];
 
 const SearchTrigger = (locationId) => {
