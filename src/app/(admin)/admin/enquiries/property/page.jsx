@@ -1,6 +1,9 @@
 "use client";
 
-import { getAdminPropertyEnquiries } from "@/actions/admin";
+import {
+    exportAdminPropertyEnquiriesCSV,
+    getAdminPropertyEnquiries,
+} from "@/actions/admin";
 import cookieService from "@/services/cookie";
 import useZaminwaleStore from "@/store";
 import { Button } from "@/components/ui/button";
@@ -8,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { format } from "date-fns";
+import { toast } from "sonner";
 
 const LIMIT = 20;
 
@@ -20,6 +24,7 @@ export default function AdminPropertyEnquiriesPage() {
     const [propertyId, setPropertyId] = useState("");
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
+    const [exporting, setExporting] = useState(false);
 
     useEffect(() => {
         const t = setTimeout(() => setSearchDebounced(search), 300);
@@ -61,6 +66,32 @@ export default function AdminPropertyEnquiriesPage() {
         setStartDate("");
         setEndDate("");
         setPage(1);
+    };
+
+    const handleExportCsv = () => {
+        setExporting(true);
+        exportAdminPropertyEnquiriesCSV({
+            q: searchDebounced || undefined,
+            propertyId: propertyId || undefined,
+            startDate: startDate || undefined,
+            endDate: endDate || undefined,
+        })
+            .then((csv) => {
+                const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = "property-enquiries.csv";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+                toast.success("Download started");
+            })
+            .catch(() => {
+                toast.error("Export failed");
+            })
+            .finally(() => setExporting(false));
     };
 
     const totalPages = Math.max(1, Math.ceil((pagination?.total ?? 0) / LIMIT));
@@ -124,6 +155,14 @@ export default function AdminPropertyEnquiriesPage() {
                     </div>
                     <Button variant="outline" size="sm" onClick={resetFilters}>
                         Reset
+                    </Button>
+                    <Button
+                        className="bg-[#6f272b] text-white hover:bg-[#5a2024]"
+                        size="sm"
+                        disabled={exporting}
+                        onClick={handleExportCsv}
+                    >
+                        {exporting ? "Exporting…" : "Export CSV"}
                     </Button>
                 </div>
 

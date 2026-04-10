@@ -9,6 +9,21 @@ import { propertyToResponse } from "../utils/propertyShape.js";
 const router = Router();
 const DEFAULT_LIMIT = 20;
 
+function toCSV(rows, columns) {
+  const header = columns.join(",");
+  const lines = rows.map((row) =>
+    columns
+      .map((col) => {
+        const v = row[col];
+        if (v == null) return "";
+        const s = String(v);
+        return s.includes(",") || s.includes('"') ? `"${s.replace(/"/g, '""')}"` : s;
+      })
+      .join(",")
+  );
+  return [header, ...lines].join("\n");
+}
+
 router.use(authMiddleware);
 router.use(adminMiddleware);
 
@@ -131,6 +146,42 @@ router.get("/enquiries/property", async (req, res, next) => {
   }
 });
 
+router.get("/enquiries/property/export", async (req, res, next) => {
+  try {
+    const where = buildPropertyEnquiryWhere(req.query);
+    const items = await prisma.propertyEnquiry.findMany({
+      where,
+      orderBy: { createdAt: "desc" },
+      include: { property: { select: { id: true, title: true } } },
+    });
+    const rows = items.map((e) => ({
+      id: e.id,
+      propertyId: e.propertyId,
+      propertyTitle: e.property?.title ?? "",
+      name: e.name,
+      email: e.email,
+      mobile: e.mobile ?? "",
+      message: e.message ?? "",
+      createdAt: e.createdAt instanceof Date ? e.createdAt.toISOString() : e.createdAt,
+    }));
+    const csv = toCSV(rows, [
+      "id",
+      "propertyId",
+      "propertyTitle",
+      "name",
+      "email",
+      "mobile",
+      "message",
+      "createdAt",
+    ]);
+    res.setHeader("Content-Type", "text/csv; charset=utf-8");
+    res.setHeader("Content-Disposition", "attachment; filename=property-enquiries.csv");
+    return res.send(csv);
+  } catch (err) {
+    next(err);
+  }
+});
+
 function buildPropertyVisitWhere(query) {
   const where = {};
   if (query.propertyId) where.propertyId = query.propertyId;
@@ -179,6 +230,44 @@ router.get("/enquiries/visit", async (req, res, next) => {
       createdAt: v.createdAt,
     }));
     return successList(res, result, { next: hasNext, page, limit, total });
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get("/enquiries/visit/export", async (req, res, next) => {
+  try {
+    const where = buildPropertyVisitWhere(req.query);
+    const items = await prisma.propertyVisit.findMany({
+      where,
+      orderBy: { createdAt: "desc" },
+      include: { property: { select: { id: true, title: true } } },
+    });
+    const rows = items.map((v) => ({
+      id: v.id,
+      propertyId: v.propertyId,
+      propertyTitle: v.property?.title ?? "",
+      name: v.name,
+      email: v.email,
+      mobile: v.mobile ?? "",
+      preferredDate: v.preferredDate ?? "",
+      message: v.message ?? "",
+      createdAt: v.createdAt instanceof Date ? v.createdAt.toISOString() : v.createdAt,
+    }));
+    const csv = toCSV(rows, [
+      "id",
+      "propertyId",
+      "propertyTitle",
+      "name",
+      "email",
+      "mobile",
+      "preferredDate",
+      "message",
+      "createdAt",
+    ]);
+    res.setHeader("Content-Type", "text/csv; charset=utf-8");
+    res.setHeader("Content-Disposition", "attachment; filename=property-visits.csv");
+    return res.send(csv);
   } catch (err) {
     next(err);
   }

@@ -44,6 +44,11 @@ export async function getAdminPropertyEnquiries({
     return res?.results?.data ?? { result: [], pagination: {} };
 }
 
+export async function exportAdminPropertyEnquiriesCSV({ q, propertyId, startDate, endDate } = {}) {
+    const query = toQueryString({ q, propertyId, startDate, endDate });
+    return fetchWithToken(`/admin/enquiries/property/export?${query}`, { method: "GET" });
+}
+
 export async function getAdminPropertyVisits({
     page = 1,
     limit = 20,
@@ -55,6 +60,11 @@ export async function getAdminPropertyVisits({
     const query = toQueryString({ page, limit, q, propertyId, startDate, endDate });
     const res = await fetchWithToken(`/admin/enquiries/visit?${query}`, { method: "GET" });
     return res?.results?.data ?? { result: [], pagination: {} };
+}
+
+export async function exportAdminPropertyVisitsCSV({ q, propertyId, startDate, endDate } = {}) {
+    const query = toQueryString({ q, propertyId, startDate, endDate });
+    return fetchWithToken(`/admin/enquiries/visit/export?${query}`, { method: "GET" });
 }
 
 export async function getAdminWebsiteEnquiries({
