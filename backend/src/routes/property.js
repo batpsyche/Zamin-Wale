@@ -183,7 +183,12 @@ router.get("/:id", async (req, res, next) => {
 router.post("/upload/file", authMiddleware, upload.single("file"), async (req, res, next) => {
   try {
     if (!req.file) return errorData(res, "No file uploaded", 400);
-    const base = process.env.API_BASE_URL || `${req.protocol}://${req.get("host")}`;
+    const forwardedProto = (req.get("x-forwarded-proto") || "").split(",")[0].trim();
+    const forwardedHost = (req.get("x-forwarded-host") || "").split(",")[0].trim();
+    const proto = forwardedProto || req.protocol;
+    const host = forwardedHost || req.get("host");
+
+    const base = process.env.API_BASE_URL || `${proto}://${host}`;
     const url = `${base}/uploads/${req.file.filename}`;
     return successResults(res, { url });
   } catch (err) {

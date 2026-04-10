@@ -10,6 +10,7 @@ import cookieService from "@/services/cookie";
 import useZaminwaleStore from "@/store";
 import { toast } from "sonner";
 import Image from "next/image";
+import { normalizeMediaUrl } from "@/lib/media";
 
 const AdminHomepageCarouselPage = () => {
     const [banners, setBanners] = useState([]);
@@ -103,7 +104,7 @@ const AdminHomepageCarouselPage = () => {
             if (!url) {
                 throw new Error("Upload did not return a URL");
             }
-            handleChange(field, url);
+            handleChange(field, normalizeMediaUrl(url));
             toast.success("Image uploaded");
         } catch (e) {
             console.error(e);

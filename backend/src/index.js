@@ -11,6 +11,10 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 const uploadDir = process.env.UPLOAD_DIR || path.join(__dirname, "..", "uploads");
 
+// Running behind a reverse proxy (e.g. Nginx on VPS) — trust forwarded headers
+// so `req.protocol`/`req.get("host")` can reflect the public URL.
+app.set("trust proxy", true);
+
 app.use(cors({ origin: process.env.CORS_ORIGIN || "http://localhost:3000", credentials: true }));
 app.use(express.json());
 

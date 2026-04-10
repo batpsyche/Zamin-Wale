@@ -3,6 +3,7 @@
 
 
 import { fetchWithoutToken, fetchWithToken } from "@/services/fetch";
+import { normalizeMediaUrl } from "@/lib/media";
 
 const formatFilterForQuery = (filter) => {
     const queryString = new URLSearchParams();
@@ -75,8 +76,13 @@ export const getHomepageBanners = async () => {
     let resp = await fetchWithoutToken("/property/homepage-banners", {
         method: "GET",
     })
-    resp = resp.results?.data ?? []
-    return resp
+    const items = resp.results?.data ?? []
+    if (!Array.isArray(items)) return []
+    return items.map((b) => ({
+        ...b,
+        desktopImageUrl: normalizeMediaUrl(b.desktopImageUrl),
+        mobileImageUrl: normalizeMediaUrl(b.mobileImageUrl),
+    }))
 }
 
 export const uploadPropertyImage = async ({ body }) => {
