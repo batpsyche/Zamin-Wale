@@ -74,6 +74,10 @@ const SearchData = [
                 value: "karjat",
             },
             {
+                label: "Pen",
+                value: "pen",
+            },
+            {
                 label: "Alibaug",
                 value: "alibaug",
             },

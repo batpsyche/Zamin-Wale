@@ -194,6 +194,10 @@ const NavItems = [
                 label: "Plot in Karjat",
                 link: "/search/top-location/karjat",
             },
+            {
+                label: "Plot in Pen",
+                link: "/search/top-location/pen",
+            },
         ],
     },
 ];

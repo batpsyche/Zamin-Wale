@@ -37,6 +37,7 @@ const Location = [
     { ranjanpada: "Ranjanpada" },
     { vindhane: "Vindhane" },
     { karjat: "Karjat" },
+    { pen: "Pen" },
     { "khopoli-pali-road": "Khopoli Pali Road" },
 ];
 
@@ -1310,6 +1311,10 @@ const FilterData = [
             {
                 label: "Karjat",
                 value: "Karjat",
+            },
+            {
+                label: "Pen",
+                value: "Pen",
             },
             {
                 label: "Khopoli Pali Road",

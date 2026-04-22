@@ -42,6 +42,11 @@ const Locations = [
         img: "img7.jpg",
         url: "/search/top-location/vindhane",
     },
+    {
+        label: "Pen Plots",
+        img: "img3.jpg",
+        url: "/search/top-location/pen",
+    },
 ];
 
 const TopLocations = () => {
