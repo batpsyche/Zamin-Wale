@@ -195,8 +195,8 @@ const NavItems = [
                 link: "/search/top-location/karjat",
             },
             {
-                label: "Plot in Pen",
-                link: "/search/top-location/pen",
+                label: "Plot in Pen Growth Centre",
+                link: "/search/top-location/pen-growth-centre",
             },
         ],
     },

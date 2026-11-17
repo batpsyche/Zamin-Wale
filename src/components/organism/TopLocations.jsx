@@ -43,9 +43,9 @@ const Locations = [
         url: "/search/top-location/vindhane",
     },
     {
-        label: "Pen Plots",
+        label: "Pen Growth Centre Plots",
         img: "img3.jpg",
-        url: "/search/top-location/pen",
+        url: "/search/top-location/pen-growth-centre",
     },
 ];
 

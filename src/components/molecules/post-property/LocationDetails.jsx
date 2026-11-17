@@ -47,7 +47,6 @@ const Step2Data = [
             { label: "Ranjanpada", value: "Ranjanpada" },
             { label: "Vindhane", value: "Vindhane" },
             { label: "Karjat", value: "Karjat" },
-            { label: "Pen", value: "Pen" },
             { label: "Pen Growth Centre", value: "Pen Growth Centre" },
             { label: "Mumbai 3.0", value: "Mumbai 3.0" },
             { label: "Palghar", value: "palghar" },

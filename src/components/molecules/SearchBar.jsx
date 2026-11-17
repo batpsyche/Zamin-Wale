@@ -42,8 +42,20 @@ const SearchData = [
         label: "Locality",
         data: [
             {
+                label: "Mumbai 3.0",
+                value: "mumbai-3-0",
+            },
+            {
+                label: "Pen Growth Centre",
+                value: "pen-growth-centre",
+            },
+            {
                 label: "Thane",
                 value: "thane",
+            },
+            {
+                label: "Alibaug",
+                value: "alibaug",
             },
             {
                 label: "Khopoli Pali Road",
@@ -72,22 +84,6 @@ const SearchData = [
             {
                 label: "Karjat",
                 value: "karjat",
-            },
-            {
-                label: "Pen",
-                value: "pen",
-            },
-            {
-                label: "Pen Growth Centre",
-                value: "pen-growth-centre",
-            },
-            {
-                label: "Mumbai 3.0",
-                value: "mumbai-3-0",
-            },
-            {
-                label: "Alibaug",
-                value: "alibaug",
             },
         ],
     },

@@ -37,7 +37,7 @@ const Location = [
     { ranjanpada: "Ranjanpada" },
     { vindhane: "Vindhane" },
     { karjat: "Karjat" },
-    { pen: "Pen" },
+    { pen: "Pen Growth Centre" }, // old /pen links
     { "pen-growth-centre": "Pen Growth Centre" },
     { "mumbai-3-0": "Mumbai 3.0" },
     { "khopoli-pali-road": "Khopoli Pali Road" },
@@ -1279,12 +1279,20 @@ const FilterData = [
                 value: "All",
             },
             {
-                label: "Alibaug",
-                value: "alibaug",
+                label: "Mumbai 3.0",
+                value: "Mumbai 3.0",
+            },
+            {
+                label: "Pen Growth Centre",
+                value: "Pen Growth Centre",
             },
             {
                 label: "Thane",
                 value: "Thane",
+            },
+            {
+                label: "Alibaug",
+                value: "alibaug",
             },
             {
                 label: "Panvel",
@@ -1313,18 +1321,6 @@ const FilterData = [
             {
                 label: "Karjat",
                 value: "Karjat",
-            },
-            {
-                label: "Pen",
-                value: "Pen",
-            },
-            {
-                label: "Pen Growth Centre",
-                value: "Pen Growth Centre",
-            },
-            {
-                label: "Mumbai 3.0",
-                value: "Mumbai 3.0",
             },
             {
                 label: "Khopoli Pali Road",
