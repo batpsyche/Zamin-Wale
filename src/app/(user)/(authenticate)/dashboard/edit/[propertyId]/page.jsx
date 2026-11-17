@@ -40,7 +40,7 @@ const EditSchema = z.object({
     listingType: z.enum(["Sell", "Rent/Lease"], {
         required_error: "You need to select type.",
     }),
-    propertyType: z.enum(["Residential", "Commercial", "Villa/bungalow"], {
+    propertyType: z.enum(["Residential", "Commercial", "Villa/bungalow", "Investment"], {
         required_error: "You need to select Property Type.",
     }),
     propertyCategories: z.string().optional(),
@@ -1439,6 +1439,15 @@ const Data = [
                     { label: "Farmhouse", value: "Farmhouse" },
                 ],
             },
+            {
+                label: "Investment",
+                value: "Investment",
+                data: [
+                    { label: "Flat/Apartment", value: "Flat/Apartment" },
+                    { label: "Plot/Land", value: "Plot/Land" },
+                    { label: "Other", value: "Other" },
+                ],
+            },
         ],
     },
     {
@@ -1460,6 +1469,8 @@ const Data = [
             { label: "Vindhane", value: "Vindhane" },
             { label: "Karjat", value: "Karjat" },
             { label: "Pen", value: "Pen" },
+            { label: "Pen Growth Centre", value: "Pen Growth Centre" },
+            { label: "Mumbai 3.0", value: "Mumbai 3.0" },
         ],
     },
     {

@@ -172,6 +172,7 @@ export default function AdminPropertiesPage() {
                                 <SelectItem value="Residential">Residential</SelectItem>
                                 <SelectItem value="Commercial">Commercial</SelectItem>
                                 <SelectItem value="Villa/bungalow">Villa/bungalow</SelectItem>
+                                <SelectItem value="Investment">Investment</SelectItem>
                             </SelectContent>
                         </Select>
                     </div>

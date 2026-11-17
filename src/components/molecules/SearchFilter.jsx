@@ -38,6 +38,8 @@ const Location = [
     { vindhane: "Vindhane" },
     { karjat: "Karjat" },
     { pen: "Pen" },
+    { "pen-growth-centre": "Pen Growth Centre" },
+    { "mumbai-3-0": "Mumbai 3.0" },
     { "khopoli-pali-road": "Khopoli Pali Road" },
 ];
 
@@ -1315,6 +1317,14 @@ const FilterData = [
             {
                 label: "Pen",
                 value: "Pen",
+            },
+            {
+                label: "Pen Growth Centre",
+                value: "Pen Growth Centre",
+            },
+            {
+                label: "Mumbai 3.0",
+                value: "Mumbai 3.0",
             },
             {
                 label: "Khopoli Pali Road",

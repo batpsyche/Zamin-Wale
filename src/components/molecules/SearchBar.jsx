@@ -78,6 +78,14 @@ const SearchData = [
                 value: "pen",
             },
             {
+                label: "Pen Growth Centre",
+                value: "pen-growth-centre",
+            },
+            {
+                label: "Mumbai 3.0",
+                value: "mumbai-3-0",
+            },
+            {
                 label: "Alibaug",
                 value: "alibaug",
             },

@@ -20,7 +20,7 @@ const BasicDetailsSchema = z.object({
     listingType: z.enum(["Sell", "Rent/Lease"], {
         required_error: "You need to select type.",
     }),
-    propertyType: z.enum(["Residential", "Commercial", "Villa/bungalow"], {
+    propertyType: z.enum(["Residential", "Commercial", "Villa/bungalow", "Investment"], {
         required_error: "You need to select Property Type.",
     }),
     propertyCategories: z.enum(
@@ -98,6 +98,24 @@ const Step1Data = [
                     {
                         label: "Farmhouse",
                         value: "Farmhouse",
+                    },
+                ],
+            },
+            {
+                label: "Investment",
+                value: "Investment",
+                data: [
+                    {
+                        label: "Flat/Apartment",
+                        value: "Flat/Apartment",
+                    },
+                    {
+                        label: "Plot/Land",
+                        value: "Plot/Land",
+                    },
+                    {
+                        label: "Other",
+                        value: "Other",
                     },
                 ],
             },
@@ -208,7 +226,7 @@ const BasicDetails = ({ onSubmit, prev, currentStep, loading, formData }) => {
                         />
                         {type && (
                             <>
-                                {["Residential"].includes(type) && (
+                                {["Residential", "Investment"].includes(type) && (
                                     <FormField
                                         control={form.control}
                                         name="propertyCategories"
