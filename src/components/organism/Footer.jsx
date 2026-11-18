@@ -175,22 +175,6 @@ const NavItems = [
                 link: "/search/top-location/panvel",
             },
             {
-                label: "Plot in Uran",
-                link: "/search/top-location/uran",
-            },
-            {
-                label: "Plot in Chirle",
-                link: "/search/top-location/chirle",
-            },
-            {
-                label: "Plot in Vindhane",
-                link: "/search/top-location/vindhane",
-            },
-            {
-                label: "Plot in Ranjanpada",
-                link: "/search/top-location/ranjanpada",
-            },
-            {
                 label: "Plot in Karjat",
                 link: "/search/top-location/karjat",
             },

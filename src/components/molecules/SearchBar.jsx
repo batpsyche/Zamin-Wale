@@ -66,22 +66,6 @@ const SearchData = [
                 value: "panvel",
             },
             {
-                label: "Uran",
-                value: "uran",
-            },
-            {
-                label: "Chirle",
-                value: "chirle",
-            },
-            {
-                label: "Ranjanpada",
-                value: "ranjanpada",
-            },
-            {
-                label: "Vindhane",
-                value: "vindhane",
-            },
-            {
                 label: "Karjat",
                 value: "karjat",
             },

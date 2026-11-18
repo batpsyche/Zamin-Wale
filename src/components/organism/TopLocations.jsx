@@ -23,26 +23,6 @@ const Locations = [
         url: "/search/top-location/panvel",
     },
     {
-        label: "Uran Plots",
-        img: "img2.jpg",
-        url: "/search/top-location/uran",
-    },
-    {
-        label: "Chirle Plots",
-        img: "img6.jpg",
-        url: "/search/top-location/chirle",
-    },
-    {
-        label: "Ranjanpada Plots",
-        img: "img5.jpg",
-        url: "/search/top-location/ranjanpada",
-    },
-    {
-        label: "Vindhane Plots",
-        img: "img7.jpg",
-        url: "/search/top-location/vindhane",
-    },
-    {
         label: "Pen Growth Centre Plots",
         img: "img3.jpg",
         url: "/search/top-location/pen-growth-centre",

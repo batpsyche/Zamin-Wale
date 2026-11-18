@@ -1299,24 +1299,8 @@ const FilterData = [
                 value: "Panvel",
             },
             {
-                label: "Uran",
-                value: "Uran",
-            },
-            {
                 label: "Third Mumbai",
                 value: "Third Mumbai",
-            },
-            {
-                label: "Chirle",
-                value: "Chirle",
-            },
-            {
-                label: "Ranjanpada",
-                value: "Ranjanpada",
-            },
-            {
-                label: "Vindhane",
-                value: "Vindhane",
             },
             {
                 label: "Karjat",

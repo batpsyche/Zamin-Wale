@@ -42,10 +42,6 @@ const Step2Data = [
         data: [
             { value: "Thane", label: "Thane" },
             { label: "Panvel", value: "Panvel" },
-            { label: "Uran", value: "Uran" },
-            { label: "Chirle", value: "Chirle" },
-            { label: "Ranjanpada", value: "Ranjanpada" },
-            { label: "Vindhane", value: "Vindhane" },
             { label: "Karjat", value: "Karjat" },
             { label: "Pen Growth Centre", value: "Pen Growth Centre" },
             { label: "Mumbai 3.0", value: "Mumbai 3.0" },
